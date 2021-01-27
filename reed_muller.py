@@ -112,4 +112,4 @@ print(message)
 
 coded = coding(message)
 broken = breaking(coded)
-fix_and_decoding(coded)
+fix_and_decoding(broken)
