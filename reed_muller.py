@@ -21,10 +21,11 @@ def coding(mes):
               [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1], 
               [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]], dtype = bool)
   
-  recieved = np.array([1, 1, 1, 1, 1], dtype = bool)
-  for j in range(5) :
-    if (mes[j] == '0') :
-      recieved[j] = False
+  recieved = np.array(np.array(list(mes), dtype=int), dtype=bool)
+ # for j in range(5) :
+ #   if (mes[j] == '0') :
+   #   recieved[j] = False
+  
   coded_message = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], dtype = bool)
   
   for i in range(16) :
@@ -47,7 +48,7 @@ def breaking(mes):
   broken = mes
   z1 = np.random.randint(0, 15)
   z2 = z3 = z1
-  while (z2 == z1) and (z3 == z1) :
+  while (z2 == z1) or (z3 == z1) :
     z2 = np.random.randint(0, 15)
     z3 = np.random.randint(0, 15)
   
