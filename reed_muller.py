@@ -21,7 +21,7 @@ def coding(mes):
               [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1], 
               [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]], dtype = bool)
   
-  recieved = [True, True, True, True, True]
+  recieved = np.array([1, 1, 1, 1, 1], dtype = bool)
   for j in range(5) :
     if (mes[j] == '0') :
       recieved[j] = False
@@ -45,12 +45,30 @@ def coding(mes):
 
 def breaking(mes):
   broken = mes
-  z = np.random.randint(0, 15)
-  print('Помеха в ', z + 1, '-м бите') 
-  if (broken[z] == '0') :
-    broken = broken[:z] + '1' + broken[z + 1 :]
+  z1 = np.random.randint(0, 15)
+  z2 = z3 = z1
+  while (z2 == z1) and (z3 == z1) :
+    z2 = np.random.randint(0, 15)
+    z3 = np.random.randint(0, 15)
+  
+  print('Помеха в', z1 + 1,'-м бите')
+  print('Помеха в', z2 + 1,'-м бите') 
+  print('Помеха в', z3 + 1,'-м бите')
+
+  if (broken[z1] == '0') :
+    broken = broken[:z1] + '1' + broken[z1 + 1 :]
   else :
-    broken = broken[:z] + '0' + broken[z + 1 :]
+    broken = broken[:z1] + '0' + broken[z1 + 1 :]
+
+  if (broken[z2] == '0') :
+    broken = broken[:z2] + '1' + broken[z2 + 1 :]
+  else :
+    broken = broken[:z2] + '0' + broken[z2 + 1 :]
+  
+  if (broken[z3] == '0') :
+    broken = broken[:z3] + '1' + broken[z3 + 1 :]
+  else :
+    broken = broken[:z3] + '0' + broken[z3 + 1 :]
   
   print('Закодированное сообщение после передачи:', broken)
   return broken
@@ -93,8 +111,6 @@ def fix_and_decoding(mes) :
   decoded_message += str(int(np.logical_xor(fixed_message[0], fixed_message[2])))
   decoded_message += str(int(np.logical_xor(fixed_message[0], fixed_message[1])))
   print('Декодированное сообщение:', decoded_message)
-
-
 
 
 f = False
